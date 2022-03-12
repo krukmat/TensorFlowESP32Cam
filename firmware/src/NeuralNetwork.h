@@ -17,18 +17,18 @@ struct TfLiteTensor;
 class NeuralNetwork
 {
 private:
-    tflite::MicroMutableOpResolver<10> *resolver;
+    tflite::MicroMutableOpResolver<3> *micro_op_resolver;
     tflite::ErrorReporter *error_reporter;
     const tflite::Model *model;
     tflite::MicroInterpreter *interpreter;
-    TfLiteTensor *input;
+    TfLiteTensor *input = nullptr;
     TfLiteTensor *output;
     uint8_t *tensor_arena;
 
 public:
-    float *getInputBuffer();
+    uint8_t *getInputBuffer();
     NeuralNetwork();
-    float predict();
+    void detect();
 };
 
 #endif
